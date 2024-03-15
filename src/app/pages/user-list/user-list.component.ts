@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
-
+  
 @Component({
   selector: 'app-user-list',
   standalone: true,
