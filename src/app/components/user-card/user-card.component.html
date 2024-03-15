@@ -1,1 +1,12 @@
-<p>user-card works!</p>
+
+<div class=" container card my-3">
+    <h5 class="card-title pt-5 p-3 fw-bold text-center">{{miUser.first_name + " " + miUser.last_name}}</h5>
+    <figure class="d-flex justify-content-center">
+        <img [routerLink]="['/dashboard', 'user', miUser._id]" class="img-fluid rounded-circle img-thumbnail smaller-circle" src={{miUser.image}} alt="{{miUser.first_name}}">
+    </figure>
+    <div class="row mt-3 mb-5 mx-2 d-flex align-items-center">
+        <a [routerLink]="['/dashboard', 'user', miUser._id]" class="col btn btn-outline-primary d-flex flex-column align-items-center border-0"><i class="icon fa-solid fa-magnifying-glass"></i>Ver detalle</a>
+        <a [routerLink]="['/updateUser']" class="col btn btn-outline-success d-flex flex-column align-items-center border-0"><i class="fa-solid fa-rotate"></i>Actualizar</a>
+            <a [routerLink]="[]" class=" col btn btn-outline-danger d-flex flex-column align-items-center border-0"><i class="fa-solid fa-trash"></i>Eliminar</a>
+    </div>
+</div>
