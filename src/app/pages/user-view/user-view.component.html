@@ -1,7 +1,7 @@
 <section>
     <h2 class="t2 text-center mt-5 fw-bold">Bienvenido a tu información personal</h2>
 </section>
-<section class="container container_ft mt-5 border">
+<section class="container container_ft mt-5 border rounded shadow-lg">
     <div class="row p-5">
         <div class="col d-flex justify-content-center">
             <figure class="img-fluid align-items-center">
@@ -21,17 +21,9 @@
             </div>
             <div class="container d-flex justify-content-center">
                 <div class="row mt-5">
-                    <div class="col">
-                        <a [routerLink]="['userList']" class="btn btn-outline-danger btn-lg border-red w-100 d-flex align-items-center shadow"><i class="fa-solid fa-trash mx-2"></i><h3>Eliminar</h3></a>
-                    </div>
-                    <div class="col">
-                        <a [routerLink]="['/updateUser']" class="btn btn-outline-primary btn-lg border-blue w-100 d-flex align-items-center shadow"><i class="fa-solid fa-rotate mx-2"></i><h3>Actualizar</h3></a>
-                    </div>
+                    <app-buttons [parent]="'view'" [idUser]="oneUser?._id || ''"></app-buttons>
                 </div>
             </div>
         </section>
-        <div class="d-flex justify-content-end">
-            <a [routerLink]="['userList']" class="btn btn-secondary btn-lg justify-content-right mt-5 mb-5"><i class="fa-solid fa-reply mx-2"></i>Volver</a>
-        </div>
     </div>
 </section>
