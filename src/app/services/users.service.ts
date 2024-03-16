@@ -8,6 +8,7 @@ import { IUser } from '../interfaces/iuser.interface';
   providedIn: 'root'
 })
 export class UsersService {
+  oneUser!: IUser;
   private httpClient = inject(HttpClient)
   private baseUrl = 'https://peticiones.online/api/users';
 
@@ -16,7 +17,7 @@ export class UsersService {
   return lastValueFrom(this.httpClient.get<any>(this.baseUrl))
   }
 
-  getById(_id:string): Promise<IUser> {
-    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${_id}`))
+  getById(_id:string): Promise<any> {
+    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/${_id}`))
   }
 }

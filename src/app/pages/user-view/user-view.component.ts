@@ -1,27 +1,31 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-view',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './user-view.component.html',
   styleUrl: './user-view.component.css'
 })
 export class UserViewComponent {
-  activatedRoute = inject(ActivatedRoute);
-  usersService = inject(UsersService);
-  oneUser!: IUser;
+  // private activatedRoute = inject(ActivatedRoute);
+  // private usersService = inject(UsersService);
+  
+  constructor(
+      private activatedRoute: ActivatedRoute,
+      private usersService: UsersService
+    ) {}
+  oneUser!: IUser | undefined;
 
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
-      const _id = params.iduser;
+      const id = params.iduser;
       try {
-        let response = await this.usersService.getById(_id);
-        console.log(response)
+        this.oneUser = await this.usersService.getById(id);
       } catch (error) {
         console.log(error);
       }
