@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
 
@@ -13,12 +13,12 @@ import { UsersService } from '../../services/users.service';
 export class UserViewComponent {
   activatedRoute = inject(ActivatedRoute);
   usersService = inject(UsersService);
-  unUser!: IUser;
+  oneUser!: IUser;
 
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
-      const _id = Number(params._id);
+      const _id = params.iduser;
       try {
         let response = await this.usersService.getById(_id);
         console.log(response)
