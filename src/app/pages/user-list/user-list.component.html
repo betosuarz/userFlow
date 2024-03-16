@@ -2,10 +2,9 @@
     <section>
         <h2 class="t2 text-center mt-5 fw-bold">Bienvenido al registro de usuarios</h2>
     </section>
-    <section class="row mt-5">
-        @for (user of arrUsers; track user._id) {
+    <section class="row mt-5 mb-5">
+        @for (user of arrUsers; track user.id) {
             <article class="col-12 col-md-6 col-lg-4">
-                <!-- <p>{{ user.first_name + " " + user.last_name}}</p> -->
                 <app-user-card [miUser]="user"></app-user-card>
             </article>
         }
