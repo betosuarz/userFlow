@@ -14,18 +14,18 @@ import { AppComponent } from '../../app.component';
 export class UserListComponent {
   usersService = inject(UsersService)
   arrUsers: IUser[] = [];
-  
+
   async ngOnInit(): Promise<void> {
-    try{
+    try {
       await this.usersService.getAll().then((res) => {
         this.arrUsers = res.results
         console.log(this.arrUsers)
       },
-    (error) => {
-      console.error('Error:', error);
-    });
+        (error) => {
+          console.error('Error:', error);
+        });
     }
-    catch(error){
+    catch (error) {
       console.error('Error al obtener los nombres de usuario:', error);
     }
   }

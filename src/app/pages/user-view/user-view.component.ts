@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
+import { ButtonsComponent } from '../../components/buttons/buttons.component';
 
 @Component({
   selector: 'app-user-view',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ButtonsComponent],
   templateUrl: './user-view.component.html',
   styleUrl: './user-view.component.css'
 })
@@ -27,7 +28,7 @@ export class UserViewComponent {
       try {
         this.oneUser = await this.usersService.getById(id);
       } catch (error) {
-        console.log(error);
+        console.log('"Error": No se ha podido recuperar el usuario ' + id);
       }
     });
   }

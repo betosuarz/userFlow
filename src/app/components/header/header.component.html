@@ -1,21 +1,24 @@
-<header class="bg-dark box-shadow-lg p-2">
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark mx-5">
-      <div class="container-fluid">
+<header class="bg-dark box-shadow-lg shadow p-4">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark mx-5">
+    <div class="d-flex">
+      <div>
         <a class="navbar-brand" href="userList">userFlow</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="userList">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="userForm">Nuevo Usuario</a>
-            </li>
-          </ul>
-        </div>
       </div>
-    </nav>
-  </header>
+      <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
+          <li class="nav-item mx-3">
+            <a class="text-decoration-none text-white btn btn-outline-warning d-flex flex-column align-items-center border-0 px-4" aria-current="page" href="userList">Home</a>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            <a class="text-decoration-none text-white btn btn-outline-primary d-flex flex-column align-items-center border-0 px-4"
+              [routerLink]="['/newUser']">Nuevo Usuario</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
