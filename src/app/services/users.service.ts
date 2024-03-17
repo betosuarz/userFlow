@@ -24,4 +24,8 @@ export class UsersService {
   delete(_id: string): Promise<any> {
     return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/${_id}`))
   }
+
+  create(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, formValue))
+  }
 }

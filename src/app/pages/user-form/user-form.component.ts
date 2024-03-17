@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -12,6 +14,8 @@ export class UserFormComponent {
 
   type: string = 'new';
   usersForm: FormGroup;
+  usersService = inject(UsersService);
+  router = inject(Router)
 
   constructor() {
     this.usersForm = new FormGroup({
@@ -23,7 +27,13 @@ export class UserFormComponent {
   }, []);
   }
 
-  getDataForm() {
-    console.log(this.usersForm.value);
+  async getDataForm() {
+    const response = await this.usersService.create(this.usersForm.value);
+    if (response.id) {
+      alert('El usuario ${response.first_name.toUpperCase} ha sido creado correctamente');
+      this.router.navigate(['/users']);
+    } else {
+      alert('Ha ocurrido un error al crear el usuario. Inténtalo de nuevo.');
+    }
   }
 }
