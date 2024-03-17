@@ -28,7 +28,7 @@ export class UserViewComponent {
       try {
         this.oneUser = await this.usersService.getById(id);
       } catch (error) {
-        console.log(error);
+        console.log('"Error": No se ha podido recuperar el usuario ' + id);
       }
     });
   }

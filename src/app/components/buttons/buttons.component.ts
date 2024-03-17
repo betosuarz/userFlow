@@ -21,10 +21,11 @@ export class ButtonsComponent {
       let response = await this.usersService.delete(id);
       if (response._id) {
         alert('Se ha borrado el usuario ' + response.first_name.toUpperCase() + ' satisfactoriamente');
+      } else {
+        alert('"Error": El usuario ' + this.idUser + ' que intentas borrar no existe');
       }
-      
-      
       console.log(response);
+
     }
   }
   
