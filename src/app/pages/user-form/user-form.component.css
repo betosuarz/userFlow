@@ -12,3 +12,15 @@ input.ng-valid.ng-touched {
     font-weight: bold;
     margin: 0px 0px 0px 20px;
 }
+
+.form-title {
+    padding-top: 50px;
+}
+
+.container-form {
+    padding-bottom: 100px;
+}
+
+.bottom-line {
+    margin-bottom: 200px;
+}
