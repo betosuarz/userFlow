@@ -13,20 +13,36 @@ import { UserCardComponent } from '../../components/user-card/user-card.componen
 
 export class UserListComponent {
   usersService = inject(UsersService)
+  currentPage: number = 1;
+  totalPages: number = 2; 
   arrUsers: IUser[] = [];
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.loadUsers(this.currentPage);
+  }
+
+  async loadUsers(page: number): Promise<void> {
     try {
-      await this.usersService.getAll().then((res: any) => {
-        this.arrUsers = res.results; 
-        console.log(this.arrUsers);
-      },
-        (error) => {
-          console.error('Error:', error);
-        });
+      const users: any = await this.usersService.getAll(page); 
+      this.arrUsers = users.results;
+      console.log(this.arrUsers);
+      this.totalPages = users.total_pages;
+    } catch (error) {
+      console.error('Error al cargar los usuarios:', error);
     }
-    catch (error) {
-      console.error('Error al obtener los nombres de usuario:', error);
+  }
+
+  async nextPage(): Promise<void> {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      await this.loadUsers(this.currentPage);
+    }
+  }
+
+  async prevPage(): Promise<void> {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      await this.loadUsers(this.currentPage);
     }
   }
 }

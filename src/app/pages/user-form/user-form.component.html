@@ -1,9 +1,9 @@
 
 <section>
-    <h2 class="t2 text-center mt-5 fw-bold">Bienvenido a un nuevo registro de usuario</h2>
+    <h2 class="form-title text-center mt-5 pb-5 fw-bold">{{ formTitle }}</h2>
 </section>
-<section class="container pt-3">
-    <form class="mt-5" [formGroup]="usersForm" (ngSubmit)="getDataForm()">
+<section class="container container-form shadow px-5 pt-4 mb-5 border rounded">
+    <form class="mt-5 px-5" [formGroup]="usersForm" (ngSubmit)="getDataForm()">
         <div>
             <label for="first_name" class="form-label"><h4>Nombre del usuario</h4></label>
             <input class="form-control" type="text" id="first_name" formControlName="first_name" placeholder="Introduce tu nombre">
@@ -62,7 +62,8 @@
         </div>
         <input type="submit" value="Enviar" [disabled]="!usersForm.valid" class="btn btn-outline-primary mt-5 px-5">
         @if(usersForm.valid === false) {
-            <p class="error">* Rellene todos los campos para crear su nuevo usuario</p>
+            <p class="error pt-2">* Rellene todos los campos para crear su nuevo usuario</p>
         }
     </form>
 </section>
+<hr class="bottom-line">

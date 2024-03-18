@@ -17,6 +17,9 @@ export class UserFormComponent {
   usersService = inject(UsersService);
   router = inject(Router)
   activatedRoute = inject(ActivatedRoute)
+  
+  formTitle: string = 'Nuevo registro de usuario';
+
 
   constructor() {
     this.usersForm = new FormGroup({
@@ -45,11 +48,11 @@ export class UserFormComponent {
     }, []);
   }
 
-  
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
       if (params.id) {
+        this.formTitle = 'Modificación de datos de usuario';
         const response = await this.usersService.getById(params.id);
         this.usersForm = new FormGroup({
           _id: new FormControl(response._id, []),

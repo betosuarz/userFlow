@@ -1,6 +1,10 @@
-<section class="container container_ft">
+<section class="nav-pages text-end gx-3">
+    <button class="btn btn-secondary btn-md mx-3" (click)="prevPage()" [disabled]="currentPage === 1"><i class="fa-solid mx-2 fa-reply"></i></button>
+    <button class="btn btn-primary btn-md dx-5" (click)="nextPage()" [disabled]="currentPage === totalPages"><i class="fa-solid mx-2 fa-share"></i></button>      
+</section>
+<section class="container container_ft pt-2">
     <section>
-        <h2 class="t2 text-center mt-5 fw-bold">Bienvenido al registro de usuarios</h2>
+        <h2 class="t2 text-center mb-2 fw-bold">Bienvenido al listado de usuarios</h2>
     </section>
     <section class="row mt-5 mb-5">
         @for (user of arrUsers; track user.id) {
@@ -9,5 +13,5 @@
             </article>
         }
     </section>
+    <hr class="bottom-line">
 </section>
-    
