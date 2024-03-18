@@ -2,7 +2,7 @@
 <section>
     <h2 class="t2 text-center mt-5 fw-bold">Bienvenido a un nuevo registro de usuario</h2>
 </section>
-<section class="container">
+<section class="container pt-3">
     <h1>{{ type }}</h1>
     <form class="mt-5" [formGroup]="usersForm" (ngSubmit)="getDataForm()">
         <div>
@@ -23,21 +23,9 @@
         </div>
         <div>
             <label for="password" class="form-label mt-4"><h4>Contraseña</h4></label>
-            <input type="string" class="form-control" type="text" id="password">
+            <input type="string" class="form-control" type="text" id="password" formControlName="password">
         </div>
-        <input type="submit" value="Enviar" class="btn btn-outline-primary mt-5 px-5">
+        <input type="submit" value="Enviar" [disabled]="!usersForm.valid" class="btn btn-outline-primary mt-5 px-5">
 
     </form>
 </section>
-
-
-<!-- export interface IUser {
-    _id?: string;
-    id?: number;
-    first_name: string;
-    last_name: string;
-    username: string;
-    email: string;
-    image: string;
-    password: string;
-} -->

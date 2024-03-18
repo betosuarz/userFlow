@@ -4,6 +4,7 @@ import { IUser } from '../../interfaces/iuser.interface';
 import { UsersService } from '../../services/users.service';
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
 
+
 @Component({
   selector: 'app-user-view',
   standalone: true,
@@ -12,13 +13,9 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
   styleUrl: './user-view.component.css'
 })
 export class UserViewComponent {
-  // private activatedRoute = inject(ActivatedRoute);
-  // private usersService = inject(UsersService);
+  private activatedRoute = inject(ActivatedRoute);
+  private usersService = inject(UsersService);
   
-  constructor(
-      private activatedRoute: ActivatedRoute,
-      private usersService: UsersService
-    ) {}
   oneUser!: IUser | undefined;
 
 
@@ -27,6 +24,8 @@ export class UserViewComponent {
       const id = params.iduser;
       try {
         this.oneUser = await this.usersService.getById(id);
+        console.log(this.oneUser);
+        
       } catch (error) {
         console.log('"Error": No se ha podido recuperar el usuario ' + id);
       }
