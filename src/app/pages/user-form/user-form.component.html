@@ -3,29 +3,66 @@
     <h2 class="t2 text-center mt-5 fw-bold">Bienvenido a un nuevo registro de usuario</h2>
 </section>
 <section class="container pt-3">
-    <h1>{{ type }}</h1>
     <form class="mt-5" [formGroup]="usersForm" (ngSubmit)="getDataForm()">
         <div>
             <label for="first_name" class="form-label"><h4>Nombre del usuario</h4></label>
-            <input type="string" class="form-control" type="text" id="first_name" formControlName="first_name">
-        </div>
+            <input class="form-control" type="text" id="first_name" formControlName="first_name" placeholder="Introduce tu nombre">
+            @if(checkControl('first_name', 'required')) {
+                <p class="error">* Campo requerido</p>
+            }
+            @if(checkControl('first_name', 'minlength')) {
+                <p class="error">* El nombre tiene que tener mínimo 3 caracteres</p>
+            }
+        </div>     
         <div>
             <label for="last_name" class="form-label mt-4"><h4>Apellido del usuario</h4></label>
-            <input type="string" class="form-control" type="text" id="last_name" formControlName="last_name">
+            <input type="string" class="form-control" type="text" id="last_name" formControlName="last_name" placeholder="Introduce tu apellido">
+            @if(checkControl('last_name', 'required')) {
+                <p class="error">* Campo requerido</p>
+            }
+            @if(checkControl('last_name', 'minlength')) {
+                <p class="error">* El apellido tiene que tener mínimo 3 caracteres</p>
+            }
         </div>
         <div>
             <label for="email" class="form-label mt-4"><h4>Correo electrónico</h4></label>
-            <input type="string" class="form-control" type="email" id="email" formControlName="email">
+            <input type="string" class="form-control" type="text" id="email" formControlName="email" placeholder="Introduce tu correo electrónico">
+            @if(checkControl('email', 'required')) {
+                <p class="error">* Campo requerido</p>
+            }
+            @if(checkControl('email', 'pattern')) {
+                <p class="error">* El formato del campo no es válido</p>
+            }
         </div>
         <div>
             <label for="username" class="form-label mt-4"><h4>Nombre de usuario</h4></label>
-            <input type="string" class="form-control" type="text" id="username" formControlName="username">
+            <input type="string" class="form-control" type="text" id="username" formControlName="username" placeholder="Introduce tu nombre de usuario">
+            @if(checkControl('username', 'required')) {
+                <p class="error">* Campo requerido</p>
+            }
+            @if(checkControl('username', 'pattern')) {
+                <p class="error">* El formato del nombre de usuario debe seguir la serie: "cadena de caracteres" + "punto" + "cadena de caracteres"</p>
+            }
         </div>
         <div>
             <label for="password" class="form-label mt-4"><h4>Contraseña</h4></label>
-            <input type="string" class="form-control" type="text" id="password" formControlName="password">
+            <input type="string" class="form-control" type="password" id="password" formControlName="password" placeholder="Introduce tu contraseña de accceso">
+            @if(checkControl('password', 'required')) {
+                <p class="error">* Campo requerido</p>
+            }
+            @if(checkControl('password', 'minlength')) {
+                <p class="error">* La contraseña debe tener como mínimo 8 caracteres</p>
+            }
+            @if(checkControl('password', 'maxlength')) {
+                <p class="error">* La contraseña debe tener como máximo 16 caracteres</p>
+            }
+            @if(checkControl('password', 'pattern')) {
+                <p class="error">* La contraseña debe tener como mínimo una minúscula, una mayúscula y un número para ser válida</p>
+            }
         </div>
         <input type="submit" value="Enviar" [disabled]="!usersForm.valid" class="btn btn-outline-primary mt-5 px-5">
-
+        @if(usersForm.valid === false) {
+            <p class="error">* Rellene todos los campos para crear su nuevo usuario</p>
+        }
     </form>
 </section>

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,13 +20,32 @@ export class UserFormComponent {
 
   constructor() {
     this.usersForm = new FormGroup({
-      first_name: new FormControl('', []),
-      last_name: new FormControl('', []),
-      email: new FormControl('', []),
-      username: new FormControl('', []),
-      password: new FormControl('', []),
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
+      ]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/)
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(16),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/)
+      ]),
     }, []);
   }
+
+  
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
@@ -60,10 +79,15 @@ export class UserFormComponent {
       const response = await this.usersService.create(this.usersForm.value);
       if (response.id) {
         alert(`El usuario ${response.first_name.toUpperCase()} ha sido creado correctamente`)
+        console.log(response);
         this.router.navigate(['/users']);
       } else {
         alert('Ha ocurrido un error al crear el usuario. Inténtalo de nuevo.');
       }
     }
+  }
+
+  checkControl (formControlName: string, error: string): boolean | undefined {
+    return this.usersForm.get(formControlName)?.hasError(error) && this.usersForm.get(formControlName)?.touched
   }
 }
