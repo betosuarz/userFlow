@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { IUser } from '../interfaces/iuser.interface';
 
 @Injectable({
@@ -12,16 +11,23 @@ export class UsersService {
   private httpClient = inject(HttpClient)
   private baseUrl = 'https://peticiones.online/api/users';
 
-  getAll(): Promise<any>
-  {
-  return lastValueFrom(this.httpClient.get<any>(this.baseUrl))
+  getAll(): Promise<IUser> {
+  return lastValueFrom(this.httpClient.get<IUser>(this.baseUrl))
+  }
+  
+  getById(_id:string): Promise<IUser> {
+    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${_id}`))
   }
 
-  getById(_id:string): Promise<any> {
-    return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/${_id}`))
+  delete(_id: string): Promise<IUser> {
+    return lastValueFrom(this.httpClient.delete<IUser>(`${this.baseUrl}/${_id}`))
   }
 
-  delete(_id: string): Promise<any> {
-    return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/${_id}`))
+  create(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, formValue))
+  }
+
+  update(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(this.httpClient.put<IUser>(`${this.baseUrl}/${formValue._id}`, formValue))
   }
 }

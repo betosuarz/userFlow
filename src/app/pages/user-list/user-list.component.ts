@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-user-list',
@@ -11,15 +10,16 @@ import { AppComponent } from '../../app.component';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
+
 export class UserListComponent {
   usersService = inject(UsersService)
   arrUsers: IUser[] = [];
 
   async ngOnInit(): Promise<void> {
     try {
-      await this.usersService.getAll().then((res) => {
-        this.arrUsers = res.results
-        console.log(this.arrUsers)
+      await this.usersService.getAll().then((res: any) => {
+        this.arrUsers = res.results; 
+        console.log(this.arrUsers);
       },
         (error) => {
           console.error('Error:', error);
